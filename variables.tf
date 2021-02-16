@@ -10,6 +10,7 @@ variable "aws_profile" {
   default     = "dxterra"
 }
 
+
 variable "project_name" {
   description = "project name is usally account's project name or platform name"
   type = string
@@ -49,30 +50,30 @@ variable "owner" {
 variable "team_name" {
   description = "team name of DevOps"
   type = string
-  default = "DX"
+  default = "Devops Transformation"
 }
 
-variable "team_nm" {
-  description = "team name of DevOps"
+variable "team_alias" {
+  description = "team name of Devops Transformation"
   type = string
   default = "dx"
 }
 
 variable "cost_center" {
-  description = "cost enter"
+  description = "CostCenter"
   type = string
-  default = "CSU"
+  default = "827519537363"
 }
 
 
 locals {
-  category_name = "${var.team_nm}-${var.region_alias}"
+  category_name = "${var.team_alias}-${var.region_alias}"
 
   resource_prefix = "${var.project_name}-${var.region_alias}-${var.env_name}"
 
   extra_tags = {
     "Owner" = var.owner
-    "Team" = var.team_nm
+    "Team" = var.team_alias
     "CostCenter" = var.cost_center
   }
 
@@ -94,7 +95,7 @@ locals {
     },
     {
       key = "Team"
-      value = var.team_nm
+      value = var.team_alias
       propagate_at_launch = true
     }
   ]
