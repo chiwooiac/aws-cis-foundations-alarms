@@ -188,7 +188,26 @@ resource aws_config_config_rule iam_user_unused_credentials_check {
   }
 
   input_parameters = jsonencode({
-    maxCredentialUsageAge = tostring(var.max_access_key_age)
+    maxCredentialUsageAge = tostring(var.max_credential_usage_age)
+  })
+
+  depends_on = [module.cis_config.aws_config_role_arn]
+
+}
+
+
+resource aws_config_config_rule access_keys_rotated_check {
+
+  name        = "access-keys-rotated-check"
+  description = "Checks whether the active access keys are rotated within the number of days specified in maxAccessKeyAge. The rule is NON_COMPLIANT if the access keys have not been rotated for more than maxAccessKeyAge number of days."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ACCESS_KEYS_ROTATED"
+  }
+
+  input_parameters = jsonencode({
+    maxAccessKeyAge = tostring(var.max_access_key_age)
   })
 
   depends_on = [module.cis_config.aws_config_role_arn]

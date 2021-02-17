@@ -65,6 +65,14 @@ variable "cost_center" {
   default = "827519537363"
 }
 
+#
+# For AWS Config Rule
+#
+variable "max_credential_usage_age" {
+  description = "Checks whether your AWS IAM users have credentials that have not been used within the specified number of days you provided"
+  type = number
+  default = 90
+}
 
 variable "max_access_key_age" {
   description = "Checks whether the active access keys are rotated within the number of days specified in maxAccessKeyAge. The rule is NON_COMPLIANT if the access keys have not been rotated for more than maxAccessKeyAge number of days."
