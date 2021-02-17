@@ -176,3 +176,21 @@ module "cis_config" {
 
 }
 
+
+resource aws_config_config_rule iam_user_unused_credentials_check {
+
+  name        = "iam-user-unused-credentials-check"
+  description = "Checks whether your AWS IAM users have credentials that have not been used within the specified number of days you provided"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "IAM_USER_UNUSED_CREDENTIALS_CHECK"
+  }
+
+  input_parameters = jsonencode({
+    maxCredentialUsageAge = tostring(var.max_access_key_age)
+  })
+
+  depends_on = [module.cis_config.aws_config_role_arn]
+
+}

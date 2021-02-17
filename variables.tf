@@ -66,6 +66,13 @@ variable "cost_center" {
 }
 
 
+variable "max_access_key_age" {
+  description = "Checks whether the active access keys are rotated within the number of days specified in maxAccessKeyAge. The rule is NON_COMPLIANT if the access keys have not been rotated for more than maxAccessKeyAge number of days."
+  type = number
+  default = 90
+}
+
+
 locals {
   category_name = "${var.team_alias}-${var.region_alias}"
 
